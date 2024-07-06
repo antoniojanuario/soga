@@ -3,8 +3,8 @@ require 'conexao.php';
 
 function existe_usuario($user_post, $excecao = null)
 {
-    global $conexao; // Acesso à conexão definida em conexao.php
-    $dados = $conexao->prepare("SELECT email FROM users WHERE email = :email");
+    global $connection; // Acesso à conexão definida em conexao.php
+    $dados = $connection->prepare("SELECT email FROM users WHERE email = :email");
     $dados->bindParam(':email', $user_post);
     $dados->execute();
     $user = $dados->fetch(PDO::FETCH_OBJ);
@@ -15,7 +15,6 @@ function existe_usuario($user_post, $excecao = null)
     
     return false;
 }
-
 function aviso_usuario_existente()
 {
     echo '

@@ -11,7 +11,7 @@
     <?php 
         require './includes/modulos.php';
         session_start();       
-        if ($_SESSION['logado'] !=true):
+        if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true):
     ?>
 
     <div class="container">
@@ -43,6 +43,7 @@
     <?php 
         else:
             header('location:pagina-inicial.php');
+            exit;
         endif;
     ?>
 </body>
@@ -68,20 +69,19 @@
         $dados->execute();
 
         if ($dados->rowCount() > 0) {
-            $senha_bd = $dados->fetchAll(PDO::FETCH_OBJ);
+            $user = $dados->fetch(PDO::FETCH_OBJ);
 
-            foreach ($senha_bd as $user) {
-                if (password_verify($senha, $user->senha)){
-                    echo "Tudo certo!";
-                    setcookie('email', $user->email);
-                    $_SESSION['logado'] = true;
-                    header('location:pagina-inicial.php');
-                    exit;
+            if (password_verify($senha, $user->password)) {
+                // Login bem-sucedido
+                $_SESSION['logado'] = true;
+                setcookie('email', $user->email, time() + 3600); // Exemplo de configuração de cookie por uma hora
+                header('location:pagina-inicial.php');
+                exit;
 
                 } else {
                     aviso_usuario_senha_incorretos();
                 }
-            }
+            
         } else {
             aviso_usuario_senha_incorretos();
         }

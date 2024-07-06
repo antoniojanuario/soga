@@ -1,6 +1,4 @@
-<?php 
-    include "./includes/functions.php";
-?>
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -41,7 +39,7 @@
                        <input type="file" name="img" accept="image/*">
                    </div>
                    <div class="buttons">
-                       <button type="submit" value="cadastrar">Avançar</button>
+                       <button type="submit" name= "cadastrar" value="cadastrar">Avançar</button>
                    </div>
                </form>
            </div>
@@ -70,7 +68,7 @@
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $img = $_POST['img'];
             $cadastro = $connection->prepare(
-                "INSERT INTO alunos (name, email, password, img) VALUES (:nome, :email, :password, :img);"
+                "INSERT INTO users (name, email, password, img) VALUES (:nome, :email, :password, :img);"
             );
             $cadastro->bindValue(":nome", $nome);
             $cadastro->bindValue(":email", $email);
@@ -82,13 +80,10 @@
 
     }
 
-    if ($cadastrado):
+    if ($cadastrado) {
+        header('Location: login.php');
+        exit;
+    }
+
 ?>
 
-<script>
-header('login.php');
-</script>
-
-<?php 
-    endif
-?>

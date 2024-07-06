@@ -29,7 +29,7 @@ if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
                 <input type="search" placeholder="Procure amigos, grupos e eventos">
             </div>
             <div class="create">
-                <label class="btn btn-primary" for="create-post">Criar</label>
+                <label class="btn btn-primary" for="create-post">Sair</label>
                 <div class="profile-photo">
                     <img src="./issets/images/TAVARES.jpg" alt="">
                 </div>
@@ -132,7 +132,7 @@ if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
                     </a>
                     <a class="menu-item">
                         <span><i class="uil uil-chart-line"></i></span>
-                        <h3>Grupos</h3>
+                        <h3>Clubes</h3>
                     </a>
                     <a class="menu-item" id="theme">
                         <span><i class="uil uil-palette"></i></span>
